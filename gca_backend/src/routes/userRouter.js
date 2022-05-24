@@ -2,18 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-router.post('/login', (req, res) => {
-    if(req.session.counter){
-        req.session.counter++;
-    }else{
-        req.session.counter = 1;
-    }
-    res.send('Hello Login ' + req.session.counter);
-});
+const userController = require('../controllers/userController.js');
 
-router.post('/logout', (req, res) => {
-    req.session.destroy();
-    res.send('logged out');
-});
+router.post('/login', userController.login);
+
+router.post('/logout', userController.logout);
+
+router.get('/secret', userController.secret);
+
 
 module.exports = router;

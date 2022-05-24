@@ -7,6 +7,7 @@ const userRouter = require('./routes/userRouter.js');
 
 //create app
 const app = express();
+app.use(express.json())
 
 //add middlewares
 app.use(session({
@@ -15,7 +16,7 @@ app.use(session({
 //add store
 
 //add routers
-app.use('/user', userRouter);
+app.use('/api/user', userRouter);
 
 //start application
 app.listen(8080, () => {
