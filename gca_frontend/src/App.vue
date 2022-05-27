@@ -8,7 +8,7 @@
         <Navbar />
     </header>
 
-    <section class="main-section">
+    <section>
         <RouterView />
     </section>
 </template>
@@ -21,9 +21,4 @@
         z-index: 100;
     }
 
-    /*main section to all routes render*/
-    .main-section {
-        padding: 32px;
-        padding-top: 100px;
-    }
 </style>

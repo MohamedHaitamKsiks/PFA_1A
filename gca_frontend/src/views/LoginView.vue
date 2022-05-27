@@ -4,8 +4,7 @@
 </script>
 
 
-<template>
-
+<template>  
     <form class="login-form">
         <h2>Connectez-vous</h2>
         <!-- Email input -->
@@ -28,6 +27,7 @@
             Password or username invalid
         </div>
     </form>
+
 </template>
 
 <script>

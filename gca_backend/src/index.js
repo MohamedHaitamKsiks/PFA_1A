@@ -4,6 +4,7 @@ const crypto = require('crypto');
 
 //import routers
 const userRouter = require('./routes/userRouter.js');
+const documentRouter = require('./routes/documentRouter.js');
 
 //create app
 const app = express();
@@ -17,6 +18,7 @@ app.use(session({
 
 //add routers
 app.use('/api/user', userRouter);
+app.use('/api/document', documentRouter);
 
 //start application
 app.listen(8080, () => {
