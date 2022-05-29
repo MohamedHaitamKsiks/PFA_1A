@@ -76,7 +76,6 @@ const documentController = {
         bodyResponse.connected = true;
 
         bodyResponse.imageName = uuid.v4() + '.png';
-        bodyResponse.imageName = 'image.png';
         console.log(bodyResponse.imageName);
 
         let filePath = 'private/tmp/' + bodyResponse.imageName
