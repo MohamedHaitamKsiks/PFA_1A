@@ -1,3 +1,4 @@
+const userModel = require('../models/user');
 
 //user controller
 const userController= {
@@ -7,21 +8,21 @@ const userController= {
 
         let responseBody = {
             accepted: false,
-
         }
 
         let username = req.body.username;
         let password = req.body.password;
 
-        if (username === 'admin' && password === 'admin') {
-            req.session.username = username;
-            responseBody.accepted = true;
-        }
-
-        res.send(responseBody)
+        userModel.getByUsername(username, (user) => {
+            if (user.id > -1 && password === user.password) {
+                req.session.userId = user.id;
+                responseBody.accepted = true;
+            }
+            res.send(responseBody)
+        });
     },
     logout: (req, res) => {
-        if (req.session.username){
+        if (req.session.userId){
             req.session.destroy();
             res.send('ok');
         }else{
@@ -30,16 +31,20 @@ const userController= {
     },
     //example request of how things going to work
     secret: (req, res) => {
-        let responseBody = {};
-        if (req.session.username) {
+        let responseBody = {
+            connected: false,
+            secret: {}
+        };
+        //if connected get all info
+        if (req.session.userId) {
             responseBody.connected = true;
-            responseBody.secret = 'MY pp is MASSIVE!';
+            userModel.getById(req.session.userId, (user) => {
+                responseBody.secret = user;
+                res.send(responseBody);
+            });
         }
-        else {
-            responseBody.connected = false;
-            responseBody.secret = '';
-        }
-        res.send(responseBody);
+        else
+            res.send(responseBody);
     }
 }
 
