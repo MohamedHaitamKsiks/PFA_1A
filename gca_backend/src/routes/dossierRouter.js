@@ -3,6 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 const dossierController = require('../controllers/dossierController.js');
+//join dossier societe
+router.get('/joinso', dossierController.joinso);
+
+//join dossier particulier
+router.get('/joinpar', dossierController.joinpar);
 
 //get all dossier
 router.get('/all', dossierController.all);

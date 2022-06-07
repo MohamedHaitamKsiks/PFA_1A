@@ -8,6 +8,15 @@ const particulierController = {
             res.send(particuliers);
         })
     },
+    //search particulier
+    search: (req, res) => {
+        let particulier = req.body;
+        particulierModel.search(particulier,(event) => {
+            res.send(event);
+        })
+    },
+
+
     //create particulier
     create: (req, res) => {
         let bodyResponse = {
@@ -20,7 +29,7 @@ const particulierController = {
         }
         //insert particulier
         bodyResponse.connected = true;
-        let particulier = req.body.particulier;
+        let particulier = req.body;
         particulierModel.insert(particulier);
         res.send(bodyResponse);
     },

@@ -16,7 +16,7 @@
         <!-- Password input -->
         <div class="form-outline mb-4">
             <input ref="password" type="password" id="password" class="form-control" v-model="password"/>
-            <label class="form-label" for="password">Mot de pass</label>
+            <label class="form-label" for="password">Mot de passe</label>
         </div>
 
         <!-- Submit button -->

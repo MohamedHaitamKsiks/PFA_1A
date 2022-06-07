@@ -2,6 +2,46 @@ const dossierModel = require("../models/dossier");
 
 //dossier controller
 const dossierController = {
+    joinso: (req, res) => {
+        let bodyResponse = {
+            connected: false,
+            dossiers: []
+        }
+        //if not connected
+        if (!req.session.userId) {
+            res.send(bodyResponse);
+            return;
+        }
+        dossierModel.joinso((dossiers) => {
+            // get dossiers data
+            bodyResponse.connected = true;
+            bodyResponse.dossiers = dossiers
+            //send response
+            console.log(bodyResponse.dossiers);
+            res.send(bodyResponse); 
+
+        });
+    },
+    joinpar: (req, res) => {
+        let bodyResponse = {
+            connected: false,
+            dossiers: []
+        }
+        //if not connected
+        if (!req.session.userId) {
+            res.send(bodyResponse);
+            return;
+        }
+        dossierModel.joinpar((dossiers) => {
+            // get dossiers data
+            bodyResponse.connected = true;
+            bodyResponse.dossiers = dossiers
+            //send response
+            console.log(bodyResponse.dossiers);
+            res.send(bodyResponse); 
+
+        });
+    },
     //get all dossier
     all: (req, res) => {
         let bodyResponse = {

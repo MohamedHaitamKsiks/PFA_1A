@@ -1,7 +1,7 @@
 const config = {
     server: {
         host: 'localhost',
-        port: '8080'
+        port: '8088'
     },
     mysql: {
         host: '127.0.0.1',

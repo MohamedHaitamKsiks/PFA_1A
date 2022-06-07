@@ -13,8 +13,6 @@
         </a>
         <div class ="nav justify-content-end">
             <NavbarLink href="/" text="Accueil"/>
-            <NavbarLink href="/" text="Dossiers"/>
-            <NavbarLink href="/" text="Comptes"/>
             <button class="btn btn-outline-danger" @click="onLogout">Se Deconnecter</button>
         </div>
 

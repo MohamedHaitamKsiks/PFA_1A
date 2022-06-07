@@ -7,6 +7,15 @@ const dossierModel = {
     accidentTravail: "travail",
     accidentVoiture: "voiture",
     //methods
+    //get join particulier
+    joinso(event){
+        mysqlQuery("select * from dossierso d join societe s on s.id=d.ids", event);
+    },
+    
+    //get join particulier
+    joinpar(event){
+        mysqlQuery("select * from dossierpar d join particulier p on p.id=d.idp", event);
+    },
     //get all dossier
     all(event) {
         mysqlQuery("SELECT * FROM dossierso UNION SELECT * FROM dossierpar", event);

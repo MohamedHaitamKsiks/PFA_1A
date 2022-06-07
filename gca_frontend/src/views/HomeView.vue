@@ -21,17 +21,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="document in documents" scope="row">
+                <tr v-for="document in documentpa" scope="row">
                     <td>{{ document.id }}</td>
-                    <td>{{ document.name }}</td>
-                    <td>{{ document.client }}</td>
+                    <td>{{ document.nom }}</td>
+                    <td>{{ document.nom + " " + document.prenom}}</td>
                     <td></td>
                 </tr>
             </tbody>
         </table>
-       
         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" aria-controls="offcanvasScrolling">Filtre</button>
     </div>
+
 
 </template>
 
@@ -39,23 +39,15 @@
     export default {
         data() {
             return {
-                documents: [],
+                documentso: [],
+                documentpa: [],
             }
         },
         methods: {
-           
+            
         },
         mounted() {
-            axios.get('/api/document/all').then( (response) => {
-                let body =  response.data
-                if (body.connected){
-                    this.documents = body.documents
-                    console.log(this.connected);
-                    this.$forceUpdate()
-                }
-                else
-                    router.push('/login');
-            })
+            
         }
     }
 </script>

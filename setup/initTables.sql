@@ -14,6 +14,7 @@ CREATE TABLE particulier (
     id INT AUTO_INCREMENT,
     nom VARCHAR(45) NOT NULL,
     prenom VARCHAR(45) NOT NULL,
+    cin VARCHAR(20),
     PRIMARY KEY(id)
 );
 
@@ -64,3 +65,6 @@ CREATE TABLE documentso (
     PRIMARY KEY(id),
     FOREIGN KEY (idds) REFERENCES dossierso(id)
 );
+
+ALTER TABLE particulier ADD COLUMN cin Varchar(25);
+ALTER TABLE particulier MODIFY COLUMN cin Varchar(25) DEFAULT 'unknown';

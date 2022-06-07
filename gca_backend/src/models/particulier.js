@@ -7,9 +7,14 @@ const particulierModel = {
 
         mysqlQuery("SELECT * FROM particulier", event);
     },
+    //get searched
+    search(particulier, event) {
+        let query = "select * from particulier where nom='"+ particulier.nom +"'and prenom='" + particulier.prenom + "'";
+        mysqlQuery(query, event);         
+    },
     //insert new particulier
     insert(particulier) {
-        let query = "INSERT INTO particulier (nom, prenom) VALUES ('" + particulier.nom + "','" + particulier.prenom + "')";
+        let query = "INSERT INTO particulier (nom, prenom, cin) VALUES ('" + particulier.nom + "','" + particulier.prenom + "','" + particulier.cin + "')";
         mysqlQuery(query, (results)=>{
             console.log("new particulier insterted");
         });
