@@ -8,7 +8,7 @@ router.post('/login', userController.login);
 
 router.post('/logout', userController.logout);
 
-router.get('/secret', userController.secret);
+router.get('/connected', userController.isConnected);
 
 
 module.exports = router;

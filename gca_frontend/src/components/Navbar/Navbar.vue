@@ -6,16 +6,15 @@
 </script>
 
 <template>
-    <nav :class="'shadow p-2 position-fixed-top  navbar bg-light navbar-animated ' + showNavbar">
-        <a class="navbar-brand">
-            <img src="../../assets/law.png" width="32" class="m-1 p-1"/>
+    <nav :class="'navbar navbar-animated ' + showNavbar">
+        <a class="navbar-title">
             Gestionnaire de cabinet d'avocat
         </a>
-        <div class ="nav justify-content-end">
-            <NavbarLink href="/" text="Accueil"/>
-            <button class="btn btn-outline-danger" @click="onLogout">Se Deconnecter</button>
+        <div class="nav-links">
+            <NavbarLink href="/" text="Accueil" />
+            <NavbarLink href="/dossier/add" text="AjouterDossier" />
+            <button class="btn btn-logout" @click="onLogout">Se Deconnecter</button>
         </div>
-
     </nav>
 </template>
 
@@ -38,6 +37,25 @@
 </script>
 
 <style>
+
+
+    /* nav bar */
+    .navbar {
+        /*position top fixed*/
+        position: fixed;
+        top: 0; 
+        left: 0; 
+        /*size */
+        width: 100%;
+        /* box style */
+        padding: 0.5cm;
+        background-color: rgb(25, 29, 36);
+        color: white;
+        display: flex;
+        /* add shadow */
+        box-shadow: 0cm 0.3cm 0.5cm rgba(0, 0, 0, 0.425);
+    }
+
     .navbar-animated {
         z-index: 10000;
         transform: translateY(0%);
@@ -47,5 +65,20 @@
     .navbar-hidden {
         transform: translateY(-100%);
     }
+
+    /* nav bar title */
+    .navbar-title {
+        font-size: x-large;
+        font-weight: bolder;
+        flex: auto;
+    }
+
+    /* nav links container */
+    .nav-links {
+        flex: initial;
+        margin-right: 1cm;
+    }
+
+    
 
 </style>

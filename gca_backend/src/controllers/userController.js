@@ -29,22 +29,17 @@ const userController= {
             res.send('none');
         }
     },
-    //example request of how things going to work
-    secret: (req, res) => {
+    //check if is connected
+    isConnected: (req, res) => {
         let responseBody = {
             connected: false,
-            secret: {}
         };
-        //if connected get all info
+        //if connected 
         if (req.session.userId) {
             responseBody.connected = true;
-            userModel.getById(req.session.userId, (user) => {
-                responseBody.secret = user;
-                res.send(responseBody);
-            });
         }
-        else
-            res.send(responseBody);
+        
+        res.send(responseBody);
     }
 }
 
