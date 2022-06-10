@@ -19,6 +19,12 @@
                 <option value="client">Par client</option>
             </select>
 
+            <!--serch by client name-->
+            <h4>Nom du client:</h4>
+            <div style="width: 90%">
+                <input v-model="filter.clientName" type="text" class="text-input" placeholder="Reherche par nom du client"/>
+            </div>
+
             <!--selection-->
             <!--type-->
             <h4>Type du client :</h4>
@@ -56,12 +62,12 @@
                 </li>
             </ul>
 
-            <button class="btn btn-login" style="top: 60%" @click="onFilterButton" >Filtrer</button>
+            <button class="btn btn-login" style="top: 60%" @click="onFilterButton">Filtrer</button>
         </FilterContainer>
 
         <div class="dossiers">
             <h1> Liste des dossiers : </h1>
-            <DossierCard v-for="(dossier, index) in filteredDossier" :dossier="dossier" :wait="index"  />
+            <DossierCard v-for="(dossier, index) in filteredDossier" :dossier="dossier" :wait="index" />
         </div>
     </div>
 
@@ -81,8 +87,9 @@
                 filter: {
                     type: 'all',
                     nature: 'all',
-                    orderBy: 'recent'
-                }
+                    orderBy: 'recent',
+                    clientName: ''
+                },
             }
         },
         methods: {
@@ -97,6 +104,12 @@
             onFilter() {
                 console.log(this.filter);
                 this.filteredDossier = [...this.dossiers];
+                //filter par recheche
+                if (this.filter.clientName != '') {
+                    this.filteredDossier = this.filteredDossier.filter((dossier) => {
+                        return dossier.nom.includes(this.filter.clientName);
+                    });
+                }
                 //les plus recent
                 if (this.filter.orderBy == 'recent')
                     this.filteredDossier = this.filteredDossier.sort((a, b) => {
@@ -154,7 +167,7 @@
                     console.log(this.dossiers);
                 });
             });
-        }
+        },
     }
 </script>
 
