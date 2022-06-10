@@ -1,9 +1,9 @@
 
 <template>
-    <div class="document-card">
+    <div class="document-card" @click="onClick">
         <img :src="'/api/document/image/images/' + chemin" class="document-card-image" />
         <div class="document-card-footer">
-            {{ type }}
+            {{ typeDocument[type] }}
         </div>
     </div>
 </template>
@@ -14,6 +14,24 @@
         props: {
             type: String,
             chemin: String
+        },
+        emits: ['show-document'],
+        //type du documents
+        data() {
+            return {
+                typeDocument: {
+                    'pv': 'PV de police',
+                    'photos': 'Photos',
+                    'med': 'Visite medicale',
+                    'contrmed': 'Contre Visite Medicale',
+                    'autre': 'Autre'
+                },
+            }
+        },
+        methods: {
+            onClick() {
+                this.$emit('show-document', this.type, this.chemin);
+            }
         }
     }
 </script>

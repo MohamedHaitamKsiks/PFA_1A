@@ -2,7 +2,7 @@
     import NavbarLink from './NavbarLink.vue';
     import router from '../../router';
     import axios from 'axios';
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
 </script>
 
 <template>

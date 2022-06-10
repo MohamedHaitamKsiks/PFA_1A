@@ -21,9 +21,7 @@
         <div class="dossier-card-footer">
             <button class="btn btn-delete" @click="onDeleted">Supprimer</button>
             <RouterLink class="btn btn-edit"
-                :to="{ path: '/dossier/edit/' + this.dossier.type + '/' +this.dossier.id }">
-                Modifier
-            </RouterLink>
+                :to="{ path: '/dossier/edit/' + this.dossier.type + '/' +this.dossier.id }">Modifier</RouterLink>
         </div>
 
     </div>

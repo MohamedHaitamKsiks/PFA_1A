@@ -44,7 +44,7 @@ const documentController = {
         let document = req.body.document;
         let imagePath = 'private/tmp/' + document.chemin;
         //check if file exists
-        if(!fs.existsSync(imagePath)){
+        if(!fs.existsSync(imagePath) || document.chemin == ''){
             res.send(bodyResponse);
             return;
         }
@@ -72,11 +72,23 @@ const documentController = {
             res.send(bodyResponse);
             return
         }
-
+        
         bodyResponse.connected = true;
+        
+        let extension = req.files.image.name.split('.')[1];
+        const valideExtensions = [
+            'png',
+            'jpeg',
+            'gif',
+            'jpg'
+        ]
+        if (valideExtensions.indexOf(extension) < 0){
+            res.send(bodyResponse);
+            return;
+        }
 
-        bodyResponse.imageName = uuid.v4() + '.png';
-        console.log(bodyResponse.imageName);
+        bodyResponse.imageName = uuid.v4() + '.' + extension;
+        console.log(req.files.image);
 
         let filePath = 'private/tmp/' + bodyResponse.imageName
 

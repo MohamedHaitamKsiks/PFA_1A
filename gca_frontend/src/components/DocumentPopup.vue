@@ -7,7 +7,7 @@
 
 <template>
     <div class="document-popup-container" v-if="!hidden">
-        <div class="document-popup">
+        <div :class="className">
             <div class="document-popup-header">
                 Ajouter un document
             </div>
@@ -23,6 +23,7 @@
                 <div class="input-container" v-if="create">
                     <label style="width: 21%">Importer un ficher : </label>
                     <input type="file" @change="uploadFile" ref="imageFile" />
+                    <label style="width: 50%; color:red" v-if="error">Dossier Invalide!</label>
                 </div>
 
                 <img :src="imagePath" class="document-popup-image" />
@@ -43,6 +44,7 @@
         props: {
             dossier: Object,
             create: Boolean,
+
         },
         expose: ['show', 'hide'],
         emits: ['update-documents'],
@@ -55,7 +57,7 @@
                         id: -1
                     },
                     nature: '',
-                    chemin: ''
+                    chemin: '',
                 },
                 //type du documents
                 typeDocument: {
@@ -66,7 +68,9 @@
                     'autre': 'Autre'
                 },
                 imagePath: '/api/document/image/images/image-placeholder.png',
-                hidden: true
+                hidden: true,
+                error: false,
+                className: 'document-popup document-popup-hide'
             }
         },
         mounted() {
@@ -84,23 +88,41 @@
                         "Content-Type": "multipart/form-data",
                     }
                 }).then((response) => {
-                    this.imagePath = '/api/document/image/tmp/' + response.data.imageName;
-                    this.document.chemin = response.data.imageName;
+                    if (response.data.imageName != ''){
+                        this.imagePath = '/api/document/image/tmp/' + response.data.imageName;
+                        this.document.chemin = response.data.imageName;
+                    }
                 });
             },
             //show and hide 
-            show() {
-                //
+            show(type, chemin) {
                 this.document.dossier = this.dossier;
-                //reset data
-                this.document.chemin = '';
-                this.document.nature = '';
+                //on create
+                if (this.create){
+                    //reset data
+                    this.document.chemin = '';
+                    this.document.nature = '';
+                    this.imagePath = '/api/document/image/images/image-placeholder.png';
+                }
+                //on show
+                else {
+                    this.document.chemin = chemin;
+                    this.document.nature = type;
+                    this.imagePath = '/api/document/image/images/' + chemin;
+                }
+                //
                 console.log('show')
                 //show
+                setTimeout(() => {
+                    this.className = 'document-popup';
+                }, 2);
                 this.hidden = false;
             },
             hide() {
-                this.hidden = true;
+                this.className = 'document-popup document-popup-hide';
+                setTimeout(() => {
+                    this.hidden = true;
+                }, 200);
             },
             //add document
             addDocument() {
@@ -109,8 +131,12 @@
                 }
                 axios.post('/api/document/create', requestBody)
                 .then((response) => {
-                    this.hide();
-                    this.$emit('update-documents');
+                    if (response.data.fileExists){
+                        this.hide();
+                        this.$emit('update-documents');
+                    }else{
+                        this.error = true;
+                    }
                 });
             }
         }
@@ -141,13 +167,13 @@
         left: 25%;
         /* background */
         width: 50%;
-        height: 80%;
+                                                                                                                                            height: 80%;
         background: white;
         /* border */
         border-radius: 0.5cm;
         overflow: hidden;
         /* transition */
-        transition: all 0.5s;
+        transition: all 0.2s;
         opacity: 100%;
         transform: scale(1);
     }
@@ -155,6 +181,7 @@
     .document-popup-hide {
         opacity: 0%;
         transform: scale(0);
+        
     }
 
     .document-popup-header {

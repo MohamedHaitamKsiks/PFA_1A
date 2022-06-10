@@ -3,7 +3,6 @@
     import router from '../router/index'
     import FilterContainer from '../components/FilterContainer.vue';
     import DossierCard from '../components/DossierCard.vue';
-import DocumentPopup from '../components/DocumentPopup.vue';
 </script>
 
 <template>

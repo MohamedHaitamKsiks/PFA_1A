@@ -3,5 +3,5 @@
 </script>
 
 <template>
-    <EditDossier :create="false" />
+    <EditDossier :create="true" />
 </template>

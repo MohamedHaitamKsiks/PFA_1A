@@ -4,7 +4,7 @@
 
 <!--template body-->
 <template>
-    <RouterLink :to="{path: href}" :class="'nav-link ' + activeClass ">{{ text }}</RouterLink>
+    <RouterLink :to="{ path: href }" :class="'nav-link ' + activeClass ">{{ text }}</RouterLink>
 </template>
 
 <!--script-->

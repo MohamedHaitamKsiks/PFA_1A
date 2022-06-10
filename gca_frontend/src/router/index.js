@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import EditDossierView from '../views/EditDossierView.vue'
+import AddDossierView from '../views/AddDossierView.vue'
 import AddClientView from '../views/AddClientView.vue'
 
 const router = createRouter({
@@ -27,12 +28,12 @@ const router = createRouter({
     //dossier routes
     {
       path: '/dossier/add',
-      name: 'add dossier',
-      component: EditDossierView
+      name: 'add_dossier',
+      component: AddDossierView
     },
     {
       path: '/dossier/edit/:type/:id',
-      name: 'edit dossier',
+      name: 'edit_dossier',
       component: EditDossierView
     },
 
