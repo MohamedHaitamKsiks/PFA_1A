@@ -9,12 +9,12 @@ const dossierModel = {
     //methods
     //get join particulier
     joinso(event){
-        mysqlQuery("select * from dossierso d join societe s on s.id=d.ids", event);
+        mysqlQuery("select d.id, d.ids, d.nature, d.info, s.nom, s.matricule from dossierso d join societe s on s.id=d.ids", event);
     },
     
     //get join particulier
     joinpar(event){
-        mysqlQuery("select * from dossierpar d join particulier p on p.id=d.idp", event);
+        mysqlQuery("select d.id, d.idp, d.nature, d.info, p.nom, p.prenom, p.cin from dossierpar d join particulier p on p.id=d.idp", event);
     },
     //get all dossier
     all(event) {
@@ -62,11 +62,24 @@ const dossierModel = {
     },
     //delete by id and type
     delete(dossier) {
-        let query = "DELETE FROM dossier" + dossier.type + " ";
+        //delete all document related to this dossier
+        let query = "DELETE FROM document" + dossier.type + " ";
+        if (dossier.type == this.societe)
+            query += "WHERE idds=" + dossier.id;
+        else
+            query += "WHERE iddp=" + dossier.id ;
+
+        mysqlQuery(query, (results) => {
+            console.log("documents of dossier num " + dossier.id + " were deleted")
+        });
+
+        //delete dossier from db
+        query = "DELETE FROM dossier" + dossier.type + " ";
         query += "WHERE id=" + dossier.id;
+        console.log(query);
         //make query
         mysqlQuery(query, (results) => {
-            console.log("dossier n " + dossier.id + "was deleted")
+            console.log("dossier num " + dossier.id + " was deleted")
         });
     },
 }

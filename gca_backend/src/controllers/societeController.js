@@ -19,7 +19,7 @@ const societeController = {
         }
         //insert societe
         bodyResponse.connected = true;
-        let societe = req.body;
+        let societe = req.body.societe;
         societeModel.insert(societe);
         res.send(bodyResponse);
     },

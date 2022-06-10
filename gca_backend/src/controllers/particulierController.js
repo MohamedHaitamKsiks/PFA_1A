@@ -29,7 +29,7 @@ const particulierController = {
         }
         //insert particulier
         bodyResponse.connected = true;
-        let particulier = req.body;
+        let particulier = req.body.particulier;
         particulierModel.insert(particulier);
         res.send(bodyResponse);
     },

@@ -7,7 +7,10 @@ const documentModel = {
     //methods
     //get documents of a specific dossier
     getByDossierId(dossier, event) {
-        mysqlQuery("SELECT * FROM document" + dossier.type + " WHERE id=" + dossier.id, event);
+        if (dossier.type == this.societe)
+            mysqlQuery("SELECT * FROM documentso WHERE idds=" + dossier.id, event);
+        else
+            mysqlQuery("SELECT * FROM documentpar WHERE iddp=" + dossier.id, event);
     },
     //insert new document
     insert(document) {

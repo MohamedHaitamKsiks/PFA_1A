@@ -31,6 +31,8 @@
                         router.push('/login');
                     }
                 });
+                //reset scroll
+                window.scrollTo(0, 0);
             }
         }
     }

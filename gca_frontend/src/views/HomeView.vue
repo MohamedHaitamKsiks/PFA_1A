@@ -3,6 +3,7 @@
     import router from '../router/index'
     import FilterContainer from '../components/FilterContainer.vue';
     import DossierCard from '../components/DossierCard.vue';
+import DocumentPopup from '../components/DocumentPopup.vue';
 </script>
 
 <template>
@@ -64,6 +65,7 @@
             <DossierCard v-for="(dossier, index) in filteredDossier" :dossier="dossier" :wait="index"  />
         </div>
     </div>
+
 
 
 </template>
@@ -150,6 +152,7 @@
                     });
                     //filter
                     this.onFilter();
+                    console.log(this.dossiers);
                 });
             });
         }

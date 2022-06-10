@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import EditDossierView from '../views/EditDossierView.vue'
-
+import AddClientView from '../views/AddClientView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +18,12 @@ const router = createRouter({
       name: 'login',
       component: LoginView
     },
+    //add client
+    {
+      path: '/client',
+      name: 'add client',
+      component: AddClientView
+    },
     //dossier routes
     {
       path: '/dossier/add',
@@ -28,7 +34,8 @@ const router = createRouter({
       path: '/dossier/edit/:type/:id',
       name: 'edit dossier',
       component: EditDossierView
-    }
+    },
+
   ]
 })
 

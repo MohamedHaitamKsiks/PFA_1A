@@ -13,6 +13,7 @@
         <div class="nav-links">
             <NavbarLink href="/" text="Accueil" />
             <NavbarLink href="/dossier/add" text="AjouterDossier" />
+            <NavbarLink href="/client" text="AjouterClient" />
             <button class="btn btn-logout" @click="onLogout">Se Deconnecter</button>
         </div>
     </nav>

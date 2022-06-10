@@ -1,3 +1,7 @@
+<script setup>
+    import { RouterLink } from 'vue-router';
+</script>
+
 <template>
     <div v-if="visible" :class="className">
         <!--dossier header-->
@@ -16,13 +20,18 @@
 
         <div class="dossier-card-footer">
             <button class="btn btn-delete" @click="onDeleted">Supprimer</button>
-            <button class="btn btn-edit" @click="onEdit">Modifier</button>
+            <RouterLink class="btn btn-edit"
+                :to="{ path: '/dossier/edit/' + this.dossier.type + '/' +this.dossier.id }">
+                Modifier
+            </RouterLink>
         </div>
 
     </div>
 </template>
 
 <script>
+    import router from '../router';
+
     export default {
         props: {
             dossier: Object,
@@ -49,16 +58,22 @@
             },
             onDeleted() {
                 if (!this.deleted) {
+                    console.log(this.dossier);
                     this.className = 'dossier-card dossier-card-deleted';
                     this.deleted = true;
                     setTimeout(() => {
                         this.visible = false;
                     }, 600);
+                    //delete request
+                    let requestBody = {
+                        dossier:{
+                            id: this.dossier.id,
+                            type: this.dossier.type
+                        },
+                    }
+                    axios.post('/api/dossier/delete', requestBody);
                 }
             },
-            onEdit() {
-
-            }
         }, 
         mounted() {
             this.show();
@@ -109,32 +124,6 @@
         padding: 0.2cm;
     }
 
-    /* delete btn */
-    .btn-delete {
-        /*box style */
-        color: white;
-        background-color: rgb(255, 59, 59);
-        border-color: rgb(255, 59, 59);
-        margin: 0.3cm;
-    }
-
-    .btn-delete:hover {
-        background-color: rgb(190, 18, 18);
-        border-color: rgb(190, 18, 18)
-    }
-
-    /* edit btn */
-    .btn-edit {
-        /*box style */
-        color: white;
-        background-color: rgb(28, 107, 203);
-        border-color: rgb(28, 107, 203);
-        margin: 0.3cm;
-    }
-
-    .btn-edit:hover {
-        background-color: rgb(15, 36, 154);
-        border-color: rgb(15, 36, 154)
-    }
+    
 
 </style>

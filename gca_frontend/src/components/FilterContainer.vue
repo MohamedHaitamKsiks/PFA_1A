@@ -14,7 +14,7 @@
     export default {
         data() {
             return {
-                hidden: false
+                hidden: true
             }
         },
         computed: {
@@ -24,6 +24,11 @@
             filterBtnClass() {
                 return this.hidden ? '' : ' filter-btn-close';
             },
+        },
+        mounted() {
+            setTimeout(() => {
+                this.hidden = false;
+            }, 5);
         }
     }
 
@@ -61,13 +66,13 @@
     .filter-container-hide {
         width: 0%;
         min-width: 0cm;
-        padding: 0;
+        opacity: 0%;
     }
 
     /* filter open*/
     .filter-btn {
         /* positiobs */
-        position: fixed;
+        position: absolute;
         left: -0.5cm;
         top: 50%;
         z-index: 1000;
